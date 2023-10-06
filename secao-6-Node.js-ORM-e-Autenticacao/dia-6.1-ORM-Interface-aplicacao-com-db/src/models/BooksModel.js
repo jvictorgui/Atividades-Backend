@@ -24,7 +24,7 @@ const BookModel = (sequelize, DataTypes) => {
       },
     }, {
       tableName: 'books', // 'books' é o nome da tabela no banco de dados
-      // underscored: true, // Opção para usar nomes de colunas em estilo snake_case
+      underscored: true, // Opção para usar nomes de colunas em estilo snake_case
       timestamps: true, // Isso adicionará automaticamente os campos 'createdAt' e 'updatedAt'
     });
   

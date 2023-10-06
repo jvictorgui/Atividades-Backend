@@ -1,4 +1,5 @@
 'use strict';
+/** @type { import('sequelize-cli').Migration } */
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -20,16 +21,19 @@ module.exports = {
       pageQuantity: { // Use snake_case here
         type: Sequelize.INTEGER, // Adjust column name as needed
         allowNull: false,
+        field: 'page_quantity'
       },
       createdAt: { // Use snake_case here
         type: Sequelize.DATE, // Adjust column name as needed
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.NOW,
+        field: 'created_at'
       },
       updatedAt: { // Use snake_case here
         type: Sequelize.DATE, // Adjust column name as needed
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.NOW,
+        field: 'updated_at'
       },
     }, {
       underscored: true, // Define underscored: true para a tabela
