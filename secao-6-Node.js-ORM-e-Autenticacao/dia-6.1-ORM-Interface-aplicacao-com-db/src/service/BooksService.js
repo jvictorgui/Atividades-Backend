@@ -16,16 +16,20 @@ const createBook = async (title, author, pageQuantity) => {
 }
 
 const updateBook = async (id, title, author, pageQuantity) => {
-    try {
-      const book = await Book.findByPk(id);
-      if (!book) {
-        throw new Error(`Book with id ${id} not found`);
-      }
-      const updatedBook = await book.update({ title, author, pageQuantity });
-      return updatedBook;
-    } catch (error) {
-      console.error(error);
+    try{
+        const book = await Book.findByPk(id);
+        if (!book) {
+            return {status: 'NOT_FOUND', data: null}
+        } 
+        const updatedBook = await book.update({ title, author, pageQuantity });
+      return {status: 'OK', data: updatedBook};      
+    } 
+    
+    catch(error) {
+        return {status: 'INTERNAL_SERVER_ERROR', data: null}
     }
+      
+      
   };
 
 module.exports = { getAllBooks, getBookById, createBook, updateBook}

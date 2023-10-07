@@ -1,4 +1,5 @@
 const {BooksService} = require('../service')
+const {mapStatusHTTP} = require('../utils/mapStatus')
 
 const getAllBooks = async (_req, res) => {
     const books = await BooksService.getAllBooks()    
@@ -23,11 +24,11 @@ const createBook = async (req, res) => {
 const updateBook = async (req, res) => {
     const {title, author, pageQuantity} = req.body;
     const { id } = req.params
-    const updatedBook = await BooksService.updateBook(id,title, author, pageQuantity)
-    if(!updatedBook) {
-        return res.status(404).send({message: 'Book not found'})
+    const {status, data} = await BooksService.updateBook(id,title, author, pageQuantity)
+    if(!data) {
+        return res.status(mapStatusHTTP(status)).send({message: 'Book not found'})
     } 
-    res.status(200).send(updatedBook)
+    res.status(mapStatusHTTP(status)).json({message: 'Book updated!', data})
 }
 module.exports = {
     getAllBooks,
